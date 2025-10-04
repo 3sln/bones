@@ -1,0 +1,14 @@
+{
+  "name": "@3sln/bones",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*"
+  },
+  "dependencies": {
+    "@3sln/dodo": "link:@3sln/dodo"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

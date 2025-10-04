@@ -1,0 +1,17 @@
+{
+  "name": "bones-reel",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@3sln/dodo": "link:@3sln/dodo",
+    "@3sln/bones": "link:@3sln/bones",
+    "@3sln/reel": "link:@3sln/reel"
+  },
+  "devDependencies": {
+    "vite": "^5.1.0"
+  }
+}
