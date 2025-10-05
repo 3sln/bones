@@ -1,4 +1,5 @@
 import { settings as s } from './settings.js';
+import { normalizeObserver } from './util.js';
 
 const BONES_BUS_API = Symbol('bones-bus-api');
 
@@ -40,12 +41,15 @@ export default function factory(userSettings) {
             this.#subscribers.clear();
         }
 
-        subscribe(observer) {
+        subscribe(observerOrNext) {
+            const observer = normalizeObserver(observerOrNext);
             this.#subscribers.add(observer);
+            
             // Immediately send the current value to the new subscriber.
             if (this.value !== undefined) {
                 observer.next?.(this.value);
             }
+            
             return {
                 unsubscribe: () => {
                     this.#subscribers.delete(observer);

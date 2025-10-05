@@ -1,5 +1,5 @@
 import { settings as s } from './settings.js';
-import { mapGetter } from './util.js';
+import { mapGetter, normalizeObserver } from './util.js';
 
 const BONES_OBSERVABLE_API = Symbol('bones-observable-api');
 
@@ -16,9 +16,10 @@ export default function factory(userSettings) {
 
     const getOptions = mapGetter(mapGet, 'placeholder', 'error');
 
-    function fromPromise(asyncFn) {
+    function fromAsync(asyncFn) {
         return {
-            subscribe: (observer) => {
+            subscribe: (observerOrNext) => {
+                const observer = normalizeObserver(observerOrNext);
                 asyncFn()
                     .then(value => {
                         observer.next?.(value);
@@ -34,7 +35,8 @@ export default function factory(userSettings) {
 
     function zip(fn, ...observables) {
         return {
-            subscribe: (observer) => {
+            subscribe: (observerOrNext) => {
+                const observer = normalizeObserver(observerOrNext);
                 const latest = new Array(observables.length);
                 const hasValue = new Array(observables.length).fill(false);
                 let allHaveValues = false;
@@ -188,7 +190,7 @@ export default function factory(userSettings) {
         }
     });
 
-    const api = { fromPromise, watch, zip, throttle };
+    const api = { fromAsync, watch, zip, throttle };
     if (userSettings) userSettings[BONES_OBSERVABLE_API] = api;
     return api;
 }
