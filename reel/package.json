@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node ./node_modules/@3sln/reel/bin/build.js"
+    "build": "reel-build"
   },
   "dependencies": {
     "@3sln/dodo": "link:@3sln/dodo",

@@ -95,6 +95,7 @@ export default function contextFactory(userSettings) {
         },
         detach(domNode) {
             detachContext(domNode, false);
+            reconcile(domNode, null);
         }
     });
 
@@ -109,6 +110,7 @@ export default function contextFactory(userSettings) {
         },
         detach(domNode) {
             detachContext(domNode, true);
+            reconcile(domNode, null);
         }
     });
 
@@ -128,7 +130,10 @@ export default function contextFactory(userSettings) {
             });
 
             reconcile(element, [content]);
-        }
+        },
+      detach(element) {
+          reconcile(element, null);
+      }
     });
 
     const api = { withContext, useContext, withEncapsulatedContext, attachContext, updateContext, detachContext };

@@ -11,7 +11,7 @@ export default function factory(userSettings) {
     const settings = s(userSettings);
     const { dodo, renderError } = settings;
     const { special, reconcile, schedule } = dodo;
-    const { mapGet } = dodo.settings;
+    const { mapGet, shouldUpdate } = dodo.settings;
     const STATE_KEY = Symbol('bones-watch');
 
     const getOptions = mapGetter(mapGet, 'placeholder', 'error');
@@ -121,6 +121,44 @@ export default function factory(userSettings) {
         };
     }
 
+    function map(fn) {
+        return (observable) => ({
+            subscribe: (observerOrNext) => {
+                const observer = normalizeObserver(observerOrNext);
+                return observable.subscribe({
+                    next: (value) => observer.next?.(fn(value)),
+                    error: (err) => observer.error?.(err),
+                    complete: () => observer.complete?.(),
+                });
+            }
+        });
+    }
+
+    function dedup() {
+        return (observable) => ({
+            subscribe: (observerOrNext) => {
+                const observer = normalizeObserver(observerOrNext);
+                let lastValue = undefined;
+                let isFirst = true;
+                return observable.subscribe({
+                    next: (value) => {
+                        if (isFirst || shouldUpdate(lastValue, value)) {
+                            isFirst = false;
+                            lastValue = value;
+                            observer.next?.(value);
+                        }
+                    },
+                    error: (err) => observer.error?.(err),
+                    complete: () => observer.complete?.(),
+                });
+            }
+        });
+    }
+
+    function pipe(observable, ...operators) {
+        return operators.reduce((obs, op) => op(obs), observable);
+    }
+
     const watch = special({
         attach(element) {
             element[STATE_KEY] = {
@@ -186,11 +224,12 @@ export default function factory(userSettings) {
             if (!state) return;
             state.abortController?.abort();
             state.subscription?.unsubscribe();
+            reconcile(element, null);
             delete element[STATE_KEY];
         }
     });
 
-    const api = { fromAsync, watch, zip, throttle };
+    const api = { fromAsync, watch, zip, throttle, map, dedup, pipe };
     if (userSettings) userSettings[BONES_OBSERVABLE_API] = api;
     return api;
 }

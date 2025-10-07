@@ -1,6 +1,6 @@
 import * as dodo from '@3sln/dodo';
-import contextFactory from '@3sln/bones/context.js';
-import observableFactory from '@3sln/bones/observable.js';
+import contextFactory from '@3sln/bones/context';
+import observableFactory from '@3sln/bones/observable';
 
 const { h, reconcile, p, button, div } = dodo;
 
@@ -8,7 +8,7 @@ const { h, reconcile, p, button, div } = dodo;
 const userSettings = { dodo };
 
 const { withContext, useContext } = contextFactory(userSettings);
-const { watch } = observableFactory(userSettings);
+const { zip, watch } = observableFactory(userSettings);
 
 // reel:ignore:start
 // --- HMR State ---
@@ -35,13 +35,22 @@ export default function demo(d) {
     const { dom, property } = driver;
 
     state.color$ ??= property('Color', { type: 'text', defaultValue: 'blue' });
+    state.fontSize$ ??= property('Font Size', { type: 'range', min: 12, max: 32, defaultValue: 16 });
+    state.content$ ??= property('Content', { type: 'text', defaultValue: 'This text is consuming the context.' });
 
-    const app = watch(state.color$, color => 
-        withContext({ color }, 
+    const context$ = zip(
+        (color, fontSize, content) => ({ color, fontSize, content }),
+        state.color$,
+        state.fontSize$,
+        state.content$
+    );
+
+    const app = watch(context$, context => 
+        withContext(context, 
             div(
                 p('This text is inside the provider.'),
-                useContext(['color'], ({ color }) => 
-                    p({ $styling: { color } }, `This text is consuming the color: ${color}`)
+                useContext(['color', 'fontSize', 'content'], ({ color, fontSize, content }) => 
+                    p({ $styling: { color, 'font-size': `${fontSize}px` } }, content)
                 )
             )
         )

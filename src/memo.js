@@ -32,6 +32,7 @@ export default function factory(userSettings) {
         },
 
         detach(element) {
+            reconcile(element, null);
             delete element[STATE_KEY];
         }
     });
