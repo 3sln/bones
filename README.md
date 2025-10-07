@@ -1,8 +1,9 @@
 # @3sln/bones
 
-A "batteries-included" utility library for the `@3sln/dodo` virtual DOM engine.
+> [!WARNING]
+> This is a work-in-progress project and is not yet ready for production use.
 
-> **Note:** This is a work-in-progress project.
+A "batteries-included" utility library for the `@3sln/dodo` virtual DOM engine.
 
 ## Features
 

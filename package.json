@@ -1,14 +1,33 @@
 {
   "name": "@3sln/bones",
   "version": "0.0.1",
+  "description": "Batteries for the @3sln/dodo virtual DOM engine.",
   "type": "module",
+  "author": "Ray Stubbs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/3sln/bones.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "vdom",
+    "virtual dom",
+    "ui",
+    "declarative",
+    "reactive",
+    "context",
+    "observable"
+  ],
   "exports": {
-    "./*": "./src/*"
+    "./*": "./src/*.js"
   },
-  "dependencies": {
-    "@3sln/dodo": "link:@3sln/dodo"
-  },
+  "files": [
+    "src/"
+  ],
   "devDependencies": {
     "@types/bun": "latest"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

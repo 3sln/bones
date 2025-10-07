@@ -4,7 +4,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "node ./node_modules/@3sln/reel/bin/build.js"
   },
   "dependencies": {
     "@3sln/dodo": "link:@3sln/dodo",
@@ -13,5 +14,15 @@
   },
   "devDependencies": {
     "vite": "^5.1.0"
+  },
+  "@3sln/reel": {
+    "title": "Bones Reel",
+    "importMap": {
+      "imports": {
+        "@3sln/dodo": "/node_modules/@3sln/dodo/index.js",
+        "@3sln/dodo/": "/node_modules/@3sln/dodo/",
+        "@3sln/bones/": "/node_modules/@3sln/bones/src/"
+      }
+    }
   }
 }
