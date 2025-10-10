@@ -2,6 +2,7 @@ import { settings as s } from './settings.js';
 import { mapGetter } from './util.js';
 
 const BONES_SHADOW_API = Symbol('bones-shadow-api');
+const INTERNALS = Symbol('bones-element-internals');
 
 export default function factory(userSettings) {
     if (userSettings?.[BONES_SHADOW_API]) {
@@ -10,7 +11,7 @@ export default function factory(userSettings) {
 
     const { dodo } = s(userSettings);
     const { special, reconcile, settings } = dodo;
-    const { mapGet } = settings;
+    const { mapGet, isMap, newMap } = settings;
     const SHADOW_ROOT_KEY = Symbol('bones-shadow-root');
 
     const getProps = mapGetter(mapGet, 'styleSheets', 'internals');
@@ -30,48 +31,24 @@ export default function factory(userSettings) {
         return shadowRoot;
     }
 
-    function reconcileInternals(host, declarations = {}) {
-        if (!host.attachInternals) {
-            return null;
-        }
-
-        const internals = host._internals || (host._internals = host.attachInternals());
-
-        for (const key in declarations) {
-            const value = declarations[key];
-            if (typeof internals[key] === 'function') {
-                internals[key](...(Array.isArray(value) ? value : [value]));
-            } else {
-                internals[key] = value;
-            }
-        }
-
-        return internals;
-    }
-
     const shadow = special({
         update(domNode, args) {
-            const [propsOrBuilder, builderOrNil] = args;
-            const hasProps = builderOrNil !== undefined;
-            
-            const builder = hasProps ? builderOrNil : propsOrBuilder;
-            const props = hasProps ? propsOrBuilder : {};
-
+            const [props, children] = (
+              isMap(args[0])
+              ? [args[0], args.slice(1)]
+              : [newMap(), args]
+            );
             const { styleSheets, internals } = getProps(props);
             
-            const internalsObject = reconcileInternals(domNode, internals);
-            const children = builder ? builder(internalsObject) : [];
-
             reconcileShadow(domNode, children, styleSheets);
         },
 
         detach(domNode) {
-            if (domNode._internals) delete domNode._internals;
             if (domNode[SHADOW_ROOT_KEY]) delete domNode[SHADOW_ROOT_KEY];
         }
     });
 
-    const api = { shadow, reconcileShadow, reconcileInternals };
+    const api = { shadow, reconcileShadow };
     if (userSettings) userSettings[BONES_SHADOW_API] = api;
     return api;
 }

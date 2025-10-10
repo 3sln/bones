@@ -63,48 +63,48 @@ export default function factory(userSettings) {
                 element[STATE_KEY] = {
                     state: 'despawned',
                     config: getConfig(config),
-                    lastBuilder: null,
                 };
+                element.style.display = config.display ?? 'block';
             },
 
-            update(element, [builder]) {
+            update(element, [isPresenting, builder], oldArgs) {
                 const state = element[STATE_KEY];
-                const isPresenting = builder != null;
-                const wasPresenting = state.lastBuilder != null;
-                state.lastBuilder = builder;
+                const wasPresenting = oldArgs?.[0];
 
                 if (isPresenting && !wasPresenting) {
-                    this.spawn(element);
+                    this.spawn(element, builder);
                 } else if (!isPresenting && wasPresenting) {
-                    this.despawn(element);
+                    this.despawn(element, builder);
                 }
             },
 
-            async spawn(element) {
+            async spawn(element, builder) {
+                element.style.display = config.display ?? 'block';
+
                 const state = element[STATE_KEY];
                 state.state = 'spawning';
                 
-                reconcile(element, state.lastBuilder(state.state));
-                const child = element.firstElementChild;
+                reconcile(element, [builder(state.state)]);
 
-                await runAnimation(child, state.config.spawn);
+                await runAnimation(element, state.config.spawn);
 
                 state.state = 'spawned';
-                reconcile(element, state.lastBuilder(state.state));
+                reconcile(element, [builder(state.state)]);
             },
 
-            async despawn(element) {
+            async despawn(element, builder) {
                 const state = element[STATE_KEY];
                 state.state = 'despawning';
-                const child = element.firstElementChild;
 
-                await runAnimation(child, state.config.despawn);
+                await runAnimation(element, state.config.despawn);
 
                 state.state = 'despawned';
                 if (state.config.mode === 'remove') {
-                    reconcile(element, null);
+                    element.style.display = 'none';
+                    reconcile(element, []);
                 } else {
-                    if(child) child.style.display = 'none';
+                    element.style.display = 'none';
+                    reconcile(element, [builder(state.state)]);
                 }
             },
 

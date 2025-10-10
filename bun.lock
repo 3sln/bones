@@ -3,17 +3,12 @@
   "workspaces": {
     "": {
       "name": "@3sln/bones",
-      "dependencies": {
-        "@3sln/dodo": "link:@3sln/dodo",
-      },
       "devDependencies": {
         "@types/bun": "latest",
       },
     },
   },
   "packages": {
-    "@3sln/dodo": ["@3sln/dodo@link:@3sln/dodo", {}],
-
     "@types/bun": ["@types/bun@1.2.23", "", { "dependencies": { "bun-types": "1.2.23" } }, "sha512-le8ueOY5b6VKYf19xT3McVbXqLqmxzPXHsQT/q9JHgikJ2X22wyTW3g3ohz2ZMnp7dod6aduIiq8A14Xyimm0A=="],
 
     "@types/node": ["@types/node@24.6.2", "", { "dependencies": { "undici-types": "~7.13.0" } }, "sha512-d2L25Y4j+W3ZlNAeMKcy7yDsK425ibcAOO2t7aPTz6gNMH0z2GThtwENCDc0d/Pw9wgyRqE5Px1wkV7naz8ang=="],
