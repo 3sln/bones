@@ -3,11 +3,22 @@
 > [!WARNING]
 > This is a work-in-progress project and is not yet ready for production use.
 
-A "batteries-included" utility library for the `@3sln/dodo` virtual DOM engine.
+Bones is a "batteries" utility library for the [Dodo](https://github.com/3sln/dodo) virtual DOM engine. It provides a collection of configurable tools to accelerate the development of modern web applications.
 
-## Features
+The library is built with a factory-based architecture. Instead of importing pre-configured components, you "bake" them yourself by passing your application's `dodo` instance to a `bones` factory. This ensures that all components use the exact same `dodo` instance, eliminating potential versioning and state conflicts.
 
-- **Context:** A robust, DOM-scoped context system (`withContext`, `useContext`).
-- **Observables:** A powerful set of reactive utilities (`watch`, `zip`, `fromPromise`, etc.).
-- **Scoping:** A declarative `shadow` component for creating Shadow DOM boundaries.
-- **And more...**
+For a complete guide please check out our [card deck](https://bones.3sln.com).
+
+## Installation
+
+```bash
+npm install @3sln/bones @3sln/dodo
+```
+or
+```bash
+bun add @3sln/bones @3sln/dodo
+```
+or
+```bash
+yarn add @3sln/bones @3sln/dodo
+```
