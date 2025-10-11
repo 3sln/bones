@@ -1,6 +1,6 @@
 import * as dodo from '@3sln/dodo';
-import visibilityFactory from '@3sln/bones/visibility';
-import reactiveFactory from '@3sln/bones/reactive';
+import visibilityFactory from '@3sln/bones/visibility.js';
+import reactiveFactory from '@3sln/bones/reactive.js';
 
 const userSettings = { dodo };
 const { withVisibility } = visibilityFactory(userSettings);

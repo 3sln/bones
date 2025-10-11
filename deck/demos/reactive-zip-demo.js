@@ -1,5 +1,5 @@
 import * as dodo from '@3sln/dodo';
-import reactiveFactory from '@3sln/bones/reactive';
+import reactiveFactory from '@3sln/bones/reactive.js';
 
 const userSettings = { dodo };
 const { watch, zip } = reactiveFactory(userSettings);

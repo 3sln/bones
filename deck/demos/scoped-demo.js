@@ -1,5 +1,5 @@
 import * as dodo from '@3sln/dodo';
-import styleFactory, { css } from '@3sln/bones/style';
+import styleFactory, { css } from '@3sln/bones/style.js';
 
 const userSettings = { dodo };
 const { scoped } = styleFactory(userSettings);

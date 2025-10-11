@@ -21,13 +21,13 @@ You can call `.next(value)` on a subject to broadcast a value to all subscribers
 
 -   `ObservableSubject.fromGlobalKey(key, initialValue?)`: Creates and returns a shared, global `ObservableSubject` instance based on a unique key. This is the foundation of the `bus` system, allowing disconnected components to communicate.
 
-<reel-demo id="bones-bus-demo" src="/demos/reactive-bus-demo.js"></reel-demo>
+<deck-demo id="bones-bus-demo" src="/demos/reactive-bus-demo.js"></deck-demo>
 
 ## watch
 
 The `watch` component subscribes to an observable and re-renders a builder function whenever the observable emits a new value.
 
-<reel-demo id="bones-watch-demo" src="/demos/reactive-watch-demo.js"></reel-demo>
+<deck-demo id="bones-watch-demo" src="/demos/reactive-watch-demo.js"></deck-demo>
 
 ## Operators and Pipe
 
@@ -38,5 +38,5 @@ You can transform observables by using operators with the `pipe` function.
 -   `dedup()`: Prevents duplicate consecutive values from being emitted.
 -   `zip(fn, ...observables)`: Combines multiple observables into one.
 
-<reel-demo id="bones-pipe-demo" src="/demos/reactive-pipe-demo.js"></reel-demo>
-<reel-demo id="bones-zip-demo" src="/demos/reactive-zip-demo.js"></reel-demo>
+<deck-demo id="bones-pipe-demo" src="/demos/reactive-pipe-demo.js"></deck-demo>
+<deck-demo id="bones-zip-demo" src="/demos/reactive-zip-demo.js"></deck-demo>

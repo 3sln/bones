@@ -14,4 +14,4 @@ This is a `special` component that uses a `ResizeObserver` to monitor the dimens
 
 This demo uses `withContainerSize` to create a size-aware component. The component is placed inside a `div` that has been made resizable with standard CSS. Drag the corner of the box to see the reported size update.
 
-<reel-demo id="bones-resize-demo" src="/demos/resize-demo.js"></reel-demo>
+<deck-demo id="bones-resize-demo" src="/demos/resize-demo.js"></deck-demo>

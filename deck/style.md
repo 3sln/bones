@@ -20,4 +20,4 @@ Using constructable stylesheets with `scoped` is much more efficient than creati
 
 This demo shows how styles are encapsulated. The red styles are defined in the main document, but they do not affect the content inside the `scoped` component. The `scoped` component has its own green styles applied via an adopted stylesheet created with the `css` utility.
 
-<reel-demo id="bones-scoped-demo" src="/demos/scoped-demo.js"></reel-demo>
+<deck-demo id="bones-scoped-demo" src="/demos/scoped-demo.js"></deck-demo>

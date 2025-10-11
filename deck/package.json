@@ -1,0 +1,37 @@
+{
+  "name": "bones-deck",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "deck-build"
+  },
+  "dependencies": {
+    "@3sln/bones": "file:../",
+    "@3sln/dodo": "^0.0.4",
+    "@3sln/deck": "link:@3sln/deck"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "vite": "^5.4.20"
+  },
+  "@3sln/deck": {
+    "title": "Bones Deck",
+    "pinned": [
+      "/introduction.md"
+    ],
+    "build": {
+      "importMap": {
+        "imports": {
+          "@3sln/dodo": "/lib/dodo/index.js",
+          "@3sln/bones/": "/lib/bones/"
+        }
+      },
+      "pick": {
+        "node_modules/@3sln/dodo/": "lib/dodo",
+        "../src": "lib/bones"
+      }
+    }
+  }
+}

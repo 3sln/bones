@@ -1,6 +1,6 @@
 import * as dodo from '@3sln/dodo';
-import resizeFactory from '@3sln/bones/resize';
-import reactiveFactory from '@3sln/bones/reactive';
+import resizeFactory from '@3sln/bones/resize.js';
+import reactiveFactory from '@3sln/bones/reactive.js';
 
 const userSettings = { dodo };
 const { withContainerSize } = resizeFactory(userSettings);

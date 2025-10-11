@@ -1,6 +1,6 @@
 import * as dodo from '@3sln/dodo';
-import animateFactory from '@3sln/bones/animate';
-import reactiveFactory from '@3sln/bones/reactive';
+import animateFactory from '@3sln/bones/animate.js';
+import reactiveFactory from '@3sln/bones/reactive.js';
 
 const userSettings = { dodo };
 const { presence } = animateFactory(userSettings);

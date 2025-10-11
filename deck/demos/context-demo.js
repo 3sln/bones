@@ -1,6 +1,6 @@
 import * as dodo from '@3sln/dodo';
-import contextFactory from '@3sln/bones/context';
-import reactiveFactory from '@3sln/bones/reactive';
+import contextFactory from '@3sln/bones/context.js';
+import reactiveFactory from '@3sln/bones/reactive.js';
 
 const userSettings = { dodo };
 const { withContext, useContext } = contextFactory(userSettings);

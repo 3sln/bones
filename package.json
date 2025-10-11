@@ -19,7 +19,7 @@
     "observable"
   ],
   "exports": {
-    "./*": "./src/*.js"
+    "./*": "./src/*"
   },
   "files": [
     "src/"

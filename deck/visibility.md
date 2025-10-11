@@ -15,4 +15,4 @@ This is a `special` component that uses an `IntersectionObserver` to monitor whe
 
 This demo creates a long, scrollable list of items. Each item uses `withVisibility` to watch its own visibility status relative to the scrollable container (which is specified via the `root` option). When an item scrolls into view, the `isVisible$` observable emits `true`, and the item's background color changes.
 
-<reel-demo id="bones-visibility-demo" src="/demos/visibility-demo.js"></reel-demo>
+<deck-demo id="bones-visibility-demo" src="/demos/visibility-demo.js"></deck-demo>

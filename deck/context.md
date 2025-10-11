@@ -26,4 +26,4 @@ The context system respects Shadow DOM boundaries by default. `useContext` will 
 
 In this demo, `withContext` provides a `color` value. A child component then uses `useContext` to subscribe to that value and render text with the specified color. The color is supplied by a `driver.property`, so you can change it from the "Properties" panel.
 
-<reel-demo id="bones-context-demo" src="/demos/context-demo.js"></reel-demo>
+<deck-demo id="bones-context-demo" src="/demos/context-demo.js"></deck-demo>

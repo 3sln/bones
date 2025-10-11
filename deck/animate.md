@@ -25,4 +25,4 @@ An animation config object can contain:
 
 This demo toggles the presence of a `div`. The `presence` component is configured to use the Web Animations API to apply a fade-in (`spawn`) and fade-out (`despawn`) animation.
 
-<reel-demo id="bones-animate-demo" src="/demos/animate-demo.js"></reel-demo>
+<deck-demo id="bones-animate-demo" src="/demos/animate-demo.js"></deck-demo>
