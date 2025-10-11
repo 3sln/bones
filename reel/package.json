@@ -10,7 +10,7 @@
   "dependencies": {
     "@3sln/bones": "file:../",
     "@3sln/dodo": "^0.0.4",
-    "@3sln/reel": "^0.0.6"
+    "@3sln/reel": "link:@3sln/reel"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

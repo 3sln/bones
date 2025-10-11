@@ -1,6 +1,5 @@
 import { settings as s } from './settings.js';
-import observableFactory from './observable.js';
-import busFactory from './bus.js';
+import reactiveFactory from './reactive.js';
 
 const BONES_CONTEXT_API = Symbol('bones-context-api');
 
@@ -12,8 +11,7 @@ export default function contextFactory(userSettings) {
     const { dodo } = s(userSettings);
     const { special, reconcile, settings } = dodo;
     const { mapGet, mapMerge, newMap, mapPut, shouldUpdate } = settings;
-    const { zip, watch } = observableFactory(userSettings);
-    const { ObservableSubject } = busFactory(userSettings);
+    const { zip, watch, ObservableSubject } = reactiveFactory(userSettings);
 
     const ENCAPSULATED_CONTEXT_KEY = Symbol('bones-encapsulated-context');
     const DECAPSULATED_CONTEXT_KEY = Symbol('bones-decapsulated-context');

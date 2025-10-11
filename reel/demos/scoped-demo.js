@@ -1,9 +1,8 @@
 import * as dodo from '@3sln/dodo';
-import shadowFactory from '@3sln/bones/shadow';
-import { css } from '@3sln/bones/css';
+import styleFactory, { css } from '@3sln/bones/style';
 
 const userSettings = { dodo };
-const { shadow } = shadowFactory(userSettings);
+const { scoped } = styleFactory(userSettings);
 
 export default driver => {
   const { reconcile, h1, p, div, style } = dodo;
@@ -25,12 +24,12 @@ export default driver => {
         h1 { color: red; }
         p { color: red; }
       `),
-      h1('Outside Shadow DOM'),
+      h1('Outside Scoped DOM'),
       p('This text is styled by the document.'),
-      shadow(
+      scoped(
         { styleSheets: [demoSheet] },
         div(
-          h1('Inside Shadow DOM'),
+          h1('Inside Scoped DOM'),
           p('This text is styled independently by the adopted stylesheet.')
         )
       )

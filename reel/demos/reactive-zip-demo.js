@@ -1,8 +1,8 @@
 import * as dodo from '@3sln/dodo';
-import observableFactory from '@3sln/bones/observable';
+import reactiveFactory from '@3sln/bones/reactive';
 
 const userSettings = { dodo };
-const { watch, zip } = observableFactory(userSettings);
+const { watch, zip } = reactiveFactory(userSettings);
 
 export default driver => {
   const { reconcile, h1, p, div } = dodo;

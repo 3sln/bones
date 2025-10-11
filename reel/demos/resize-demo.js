@@ -1,10 +1,10 @@
 import * as dodo from '@3sln/dodo';
 import resizeFactory from '@3sln/bones/resize';
-import observableFactory from '@3sln/bones/observable';
+import reactiveFactory from '@3sln/bones/reactive';
 
 const userSettings = { dodo };
 const { withContainerSize } = resizeFactory(userSettings);
-const { watch } = observableFactory(userSettings);
+const { watch } = reactiveFactory(userSettings);
 
 export default driver => {
   const { reconcile, h1, p, div } = dodo;

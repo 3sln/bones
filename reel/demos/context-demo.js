@@ -1,10 +1,10 @@
 import * as dodo from '@3sln/dodo';
 import contextFactory from '@3sln/bones/context';
-import observableFactory from '@3sln/bones/observable';
+import reactiveFactory from '@3sln/bones/reactive';
 
 const userSettings = { dodo };
 const { withContext, useContext } = contextFactory(userSettings);
-const { watch } = observableFactory(userSettings);
+const { watch } = reactiveFactory(userSettings);
 
 export default driver => {
   const { reconcile, p, div } = dodo;

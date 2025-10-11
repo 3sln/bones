@@ -1,12 +1,10 @@
 import * as dodo from '@3sln/dodo';
 import animateFactory from '@3sln/bones/animate';
-import observableFactory from '@3sln/bones/observable';
-import busFactory from '@3sln/bones/bus';
+import reactiveFactory from '@3sln/bones/reactive';
 
 const userSettings = { dodo };
 const { presence } = animateFactory(userSettings);
-const { watch } = observableFactory(userSettings);
-const { ObservableSubject } = busFactory(userSettings);
+const { ObservableSubject, watch } = reactiveFactory(userSettings);
 
 export default driver => {
   const { reconcile, h1, p, div, button } = dodo;

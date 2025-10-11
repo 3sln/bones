@@ -1,14 +1,11 @@
 import * as dodo from '@3sln/dodo';
-import observableFactory from '@3sln/bones/observable';
-import busFactory from '@3sln/bones/bus';
+import reactiveFactory from '@3sln/bones/reactive';
 
 const userSettings = { dodo };
-const { watch } = observableFactory(userSettings);
-const { ObservableSubject } = busFactory(userSettings);
+const { watch, ObservableSubject } = reactiveFactory(userSettings);
 
 export default driver => {
   const { reconcile, h1, p, div, button } = dodo;
-
 
   driver.panel('Demo', (container, signal) => {
     const counter$ = new ObservableSubject(0);

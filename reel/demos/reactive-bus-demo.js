@@ -1,17 +1,15 @@
 import * as dodo from '@3sln/dodo';
-import busFactory from '@3sln/bones/bus';
-import observableFactory from '@3sln/bones/observable';
+import reactiveFactory from '@3sln/bones/reactive';
 
 const userSettings = { dodo };
-const { fromGlobalKey, publish } = busFactory(userSettings);
-const { watch } = observableFactory(userSettings);
+const { ObservableSubject, watch } = reactiveFactory(userSettings);
 
 export default driver => {
   const { reconcile, h1, h2, p, div, button, input } = dodo;
 
   // 1. Create a bus from a global key
   const GREETING_BUS = Symbol('greeting-bus');
-  const greeting$ = fromGlobalKey(GREETING_BUS, 'Hello');
+  const greeting$ = ObservableSubject.fromGlobalKey(GREETING_BUS, 'Hello');
 
   // 2. A component that publishes to the bus
   const Publisher = () => {

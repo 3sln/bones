@@ -1,12 +1,18 @@
 import { settings as s } from './settings.js';
 import { mapGetter } from './util.js';
 
-const BONES_SHADOW_API = Symbol('bones-shadow-api');
-const INTERNALS = Symbol('bones-element-internals');
+const BONES_STYLE_API = Symbol('bones-style-api');
+
+export function css(strings, ...values) {
+    const cssText = strings.reduce((acc, str, i) => acc + str + (values[i] || ''), '');
+    const sheet = new CSSStyleSheet();
+    sheet.replaceSync(cssText);
+    return sheet;
+}
 
 export default function factory(userSettings) {
-    if (userSettings?.[BONES_SHADOW_API]) {
-        return userSettings[BONES_SHADOW_API];
+    if (userSettings?.[BONES_STYLE_API]) {
+        return userSettings[BONES_STYLE_API];
     }
 
     const { dodo } = s(userSettings);
@@ -14,7 +20,7 @@ export default function factory(userSettings) {
     const { mapGet, isMap, newMap } = settings;
     const SHADOW_ROOT_KEY = Symbol('bones-shadow-root');
 
-    const getProps = mapGetter(mapGet, 'styleSheets', 'internals');
+    const getProps = mapGetter(mapGet, 'styleSheets');
 
     function reconcileShadow(host, children, styleSheets = []) {
         let shadowRoot = host[SHADOW_ROOT_KEY];
@@ -31,14 +37,14 @@ export default function factory(userSettings) {
         return shadowRoot;
     }
 
-    const shadow = special({
+    const scoped = special({
         update(domNode, args) {
             const [props, children] = (
               isMap(args[0])
               ? [args[0], args.slice(1)]
               : [newMap(), args]
             );
-            const { styleSheets, internals } = getProps(props);
+            const { styleSheets } = getProps(props);
             
             reconcileShadow(domNode, children, styleSheets);
         },
@@ -48,7 +54,7 @@ export default function factory(userSettings) {
         }
     });
 
-    const api = { shadow, reconcileShadow };
-    if (userSettings) userSettings[BONES_SHADOW_API] = api;
+    const api = { scoped, reconcileShadow };
+    if (userSettings) userSettings[BONES_STYLE_API] = api;
     return api;
 }

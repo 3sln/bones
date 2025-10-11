@@ -13,14 +13,3 @@ export function mapGetter(mapGet, ...keys) {
         return result;
     };
 }
-
-/**
- * Normalizes an observer argument, allowing subscribe methods to accept
- * either a function (for the `next` handler) or a full observer object.
- */
-export function normalizeObserver(observerOrNext) {
-    if (typeof observerOrNext === 'function') {
-        return { next: observerOrNext };
-    }
-    return observerOrNext || {};
-}

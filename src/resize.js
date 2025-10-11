@@ -1,5 +1,5 @@
 import { settings as s } from './settings.js';
-import busFactory from './bus.js';
+import reactiveFactory from './reactive.js';
 
 const BONES_RESIZE_API = Symbol('bones-resize-api');
 const WITH_CONTAINER_SIZE_STATE = Symbol('bones-with-container-size-state');
@@ -27,7 +27,7 @@ export default function factory(userSettings) {
 
     const { dodo } = s(userSettings);
     const { special, reconcile } = dodo;
-    const { ObservableSubject } = busFactory(userSettings);
+    const { ObservableSubject } = reactiveFactory(userSettings);
 
     const withContainerSize = special({
         attach(element) {
