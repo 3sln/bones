@@ -4,12 +4,12 @@
  * The returned object should be immediately destructured and not held onto.
  */
 export function mapGetter(mapGet, ...keys) {
-    const result = {};
+  const result = {};
 
-    return (map) => {
-        for (const key of keys) {
-            result[key] = mapGet(map, key);
-        }
-        return result;
-    };
+  return map => {
+    for (const key of keys) {
+      result[key] = mapGet(map, key);
+    }
+    return result;
+  };
 }

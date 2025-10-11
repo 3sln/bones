@@ -1,11 +1,11 @@
 import * as dodo from '@3sln/dodo';
-import styleFactory, { css } from '@3sln/bones/style.js';
+import styleFactory, {css} from '@3sln/bones/style.js';
 
-const userSettings = { dodo };
-const { scoped } = styleFactory(userSettings);
+const userSettings = {dodo};
+const {scoped} = styleFactory(userSettings);
 
 export default driver => {
-  const { reconcile, h1, p, div, style } = dodo;
+  const {reconcile, h1, p, div, style} = dodo;
 
   driver.panel('Demo', (container, signal) => {
     const demoSheet = css`
@@ -27,12 +27,12 @@ export default driver => {
       h1('Outside Scoped DOM'),
       p('This text is styled by the document.'),
       scoped(
-        { styleSheets: [demoSheet] },
+        {styleSheets: [demoSheet]},
         div(
           h1('Inside Scoped DOM'),
-          p('This text is styled independently by the adopted stylesheet.')
-        )
-      )
+          p('This text is styled independently by the adopted stylesheet.'),
+        ),
+      ),
     );
 
     reconcile(container, [app]);

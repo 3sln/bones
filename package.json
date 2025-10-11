@@ -26,5 +26,11 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "format": "prettier -w \"**/*.js\""
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
   }
 }
