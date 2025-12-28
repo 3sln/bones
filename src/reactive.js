@@ -29,7 +29,7 @@ export default function factory(userSettings) {
       }
       const observer =
         typeof observerOrNext === 'function' ? {next: observerOrNext} : observerOrNext;
-      this.#subscribe(observer);
+      return this.#subscribe(observer);
     }
 
     static fromAsync(asyncFn) {
