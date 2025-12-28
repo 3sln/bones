@@ -1,6 +1,6 @@
 {
   "name": "@3sln/bones",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Batteries for the @3sln/dodo virtual DOM engine.",
   "type": "module",
   "author": "Ray Stubbs",
